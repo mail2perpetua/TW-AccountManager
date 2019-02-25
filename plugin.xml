@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.eqamobile.cordova.AccountManagerPlugin"
+    version="0.1.0">
+    <name>AccountManager</name>
+    <description>An Android AccountManager plugin for Apache Cordova.</description>
+    <keywords>cordova,account,android</keywords>
+
+
+    <js-module src="www/js/AccountManager.js" name="AccountManager">
+        <clobbers target="AccountManager" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+	<config-file target="res/xml/config.xml" parent="/*">
+		<feature name="AccountManager" >
+			<param name="android-package" value="com.eqamobile.cordova.AccountManagerPlugin"/>
+		</feature>
+	</config-file>
+	
+	<config-file target="res/values/strings.xml" parent="/*">
+		<string name="aam_account_type">TimeWatsonAccount</string>
+	</config-file>
+
+	<config-file target="AndroidManifest.xml" parent="/manifest/application">
+		<service android:exported="false" android:name="com.eqamobile.cordova.AuthenticatorService">
+			<intent-filter>
+				<action android:name="android.accounts.AccountAuthenticator" />
+			</intent-filter>
+			<meta-data android:name="android.accounts.AccountAuthenticator" android:resource="@xml/authenticator" />
+		</service>
+	</config-file>
+
+	<config-file target="AndroidManifest.xml" parent="/*">
+		<uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+		<uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+		<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+		<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+	</config-file>
+
+	<resource-file src="res/xml/authenticator.xml" target="res/xml/authenticator.xml" />
+
+	<source-file src="src/android/AccountManagerPlugin.java" target-dir="src/com/eqamobile/cordova" />
+	<source-file src="src/android/Authenticator.java" target-dir="src/com/eqamobile/cordova" />
+	<source-file src="src/android/AuthenticatorService.java" target-dir="src/com/eqamobile/cordova" />
+    </platform>
+</plugin>

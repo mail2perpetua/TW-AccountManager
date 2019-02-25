@@ -1,0 +1,20 @@
+{
+  "name": "AccountManagerPlugin",
+  "version": "0.1.0",
+  "description": "An Android AccountManager plugin for Apache Cordova.",
+  "cordova": {
+    "id": "com.eqamobile.cordova.AccountManagerPlugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "account",
+    "android",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "mnpn"
+  
+}
